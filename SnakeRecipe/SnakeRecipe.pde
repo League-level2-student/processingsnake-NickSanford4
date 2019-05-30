@@ -83,21 +83,35 @@ void move() {
 }
 // 18. Complete the keyPressed method below. Use if statements to set your direction variable depending on what key is pressed.
 void keyPressed() {
+  if (key == CODED) {
+  if (keyCode == UP) {
+    direction = "up";
+  }
+  if (keyCode == DOWN){
+    direction = "down";
+  }
+  if (keyCode == LEFT){
+    direction = "left";
+  }
+  if (keyCode == RIGHT){
+    direction = "right";
+  }
+}
 }
 // 19. check if your head is out of bounds (teleport your snake head to the other side).
 
 void checkBoundaries() {
-  if (head.x >= 500){
+  if (head.x > 500){
     head.x=0;
   }
-  if (head.y >= 500){
+  if (head.y > 500){
     head.y=0;
   }
 
- if (head.x <= 0){
+ if (head.x < 0){
     head.x=500;
   }
-  if (head.y <= 0){
+  if (head.y < 0){
     head.y=500;
   }
 }
@@ -111,6 +125,11 @@ void collision() {
 
   // If the segment is colliding with a piece of food...
      // Increase the amount of food eaten and set foodX and foodY to new random locations.
+ if(head.x==foodX && head.y==foodY){
+foodX = ((int)random(50)*10);;
+foodY = ((int)random(50)*10);
+food++;
+ }
 }
 
 
@@ -122,20 +141,23 @@ void collision() {
  **/
 
 //  1. Create and initialize an ArrayList of Segments. (This will be your snake tail!)
-
+ArrayList<Segment> tail= new ArrayList<Segment>();
 
 // 2. Complete the missing parts of the manageTail method below and call it in the draw method.
 
 void manageTail() {
 
   //Call the drawTail and checkTailCollision methods.
-
+drawTail();
+checkTailCollision();
   // Add a new Segment to your ArrayList that has the same X and Y as the head of your snake.
-
+tail.add(new Segment(head.x,head.y));
   // To keep your tail the right length:
   // while the tail size is greater than the number of food pieces eaten, remove the first Segment in your tail.
-
-}
+//while(tail>food){
+//  tail.remove;
+//}
+//}
 
 void drawTail() {
     // Draw a 10 by 10 rectangle for each Segment in your snake ArrayList.
